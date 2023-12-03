@@ -26,7 +26,7 @@ schema = StructType([
 spark = SparkSession.builder.appName("Training").getOrCreate()
 
 # Reading the training dataset with specified schema and options
-training_dataset = spark.read.schema(schema).options(delimiter=';', header=True, quote='"', ignoreLeadingWhiteSpace=True, ignoreTrailingWhiteSpace=True).csv('file:///home/ec2-user/TrainingDataset.csv')
+training_dataset = spark.read.schema(schema).options(delimiter=';', header=True, quote='"', ignoreLeadingWhiteSpace=True, ignoreTrailingWhiteSpace=True).csv('file:///home/ec2-user/Cs643_programming_assignment2_aravind_kurapati/TrainingDataset.csv')
 
 # Removing double quotes from column names
 training_dataset = training_dataset.toDF(*[col.replace('"', '') for col in training_dataset.columns])
@@ -59,4 +59,4 @@ f1 = multiclass_evaluator.evaluate(predictions)
 print("F1 Score: {:.4f}".format(f1))
 
 # Saving the trained logistic regression model
-model.save("file:///home/ec2-user/logistic_regression")
+model.save("file:///home/ec2-user/Cs643_programming_assignment2_aravind_kurapati/logistic_regression")
