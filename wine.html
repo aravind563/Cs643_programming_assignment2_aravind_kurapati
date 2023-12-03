@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wine Quality Prediction</title>
+</head>
+<body>
+    <h1>Wine Quality Prediction</h1>
+    <form id="uploadForm" action="http://ec2-75-101-219-93.compute-1.amazonaws.com:5000/predict" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="fileInput">
+        <input type="submit" value="Upload">
+    </form>
+    <p id="result" style="display: none;"></p>
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            // Extracting file input and creating FormData
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append("file", file);
+
+            // Making a POST request to the prediction endpoint
+            fetch("http://ec2-75-101-219-93.compute-1.amazonaws.com:5000/predict", {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Displaying the F1 score result
+                const resultElement = document.getElementById("result");
+                resultElement.innerHTML = "F1 Score: " + data.f1_score;
+                resultElement.style.display = "block";
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>
