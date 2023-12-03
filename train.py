@@ -59,4 +59,4 @@ f1 = multiclass_evaluator.evaluate(predictions)
 print("F1 Score: {:.4f}".format(f1))
 
 # Saving the trained logistic regression model
-model.save("logistic_regression")
+model.save("file:///home/ec2-user/Cs643_programming_assignment2_aravind_kurapati/logistic_regression")
