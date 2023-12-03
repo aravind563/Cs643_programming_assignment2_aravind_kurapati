@@ -26,7 +26,7 @@ schema = StructType([
 spark = SparkSession.builder.appName("Training").getOrCreate()
 
 # Reading the training dataset with specified schema and options
-training_dataset = spark.read.schema(schema).options(delimiter=';', header=True, quote='"', ignoreLeadingWhiteSpace=True, ignoreTrailingWhiteSpace=True).csv('file:///home/ec2-user/Cs643_programming_assignment2_aravind_kurapati/TrainingDataset.csv')
+training_dataset = spark.read.schema(schema).options(delimiter=';', header=True, quote='"', ignoreLeadingWhiteSpace=True, ignoreTrailingWhiteSpace=True).csv('file:///home/ec2-user/TrainingDataset.csv')
 
 # Removing double quotes from column names
 training_dataset = training_dataset.toDF(*[col.replace('"', '') for col in training_dataset.columns])
